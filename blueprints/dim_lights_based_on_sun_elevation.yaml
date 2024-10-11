@@ -263,7 +263,9 @@ variables:
             * current brightness is equal to last set brightness (has not been changed by the user within the allowance)
         #}
         {%- if e in affected_entities -%}
-          {%- if trigger_is_event and (not is_on or (is_on and last_changed.seconds < 2)) -%}
+          {%- if trigger_is_event and (is_on and last_changed.seconds < 6)) -%}
+              {%- set data.entities = [] -%}
+          {%- elif trigger_is_event and (not is_on or (is_on and last_changed.seconds < 12)) -%}
             {%- set data.entities = data.entities + [e] -%}
           {%- elif can_dim and force_turn_on -%}
             {%- set data.entities = data.entities + [e] -%}
